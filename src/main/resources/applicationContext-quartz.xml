@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd "
+	default-lazy-init="false" >
+
+		<bean id="abrojateTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="abrojateJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="abrojateJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="abrojateJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="abrojateJob" class="net.hp.healthcare.job.AbrojateJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+    
+
+		<bean id="departmentTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="departmentJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="departmentJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="departmentJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="departmentJob" class="net.hp.healthcare.job.DepartmentJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+		
+		<bean id="doctorTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="doctorJobDetail"></property>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="doctorJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="doctorJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="doctorJob" class="net.hp.healthcare.job.DoctorJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+
+		<bean id="appointmentTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="appointmentJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="appointmentJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="appointmentJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="appointmentJob" class="net.hp.healthcare.job.AppointmentJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+				
+		<bean id="billDetailTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="billDetailJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="billDetailJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="billDetailJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="billDetailJob" class="net.hp.healthcare.job.BillDetailJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+				
+		<bean id="billTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="billJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="billJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="billJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="billJob" class="net.hp.healthcare.job.BillJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+		
+		
+		<bean id="codemstrTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="codemstrJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="codemstrJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="codemstrJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="codemstrJob" class="net.hp.healthcare.job.CodemstrJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+
+		<bean id="dutyTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="dutyJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="dutyJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="dutyJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="dutyJob" class="net.hp.healthcare.job.DutyJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+				
+		<bean id="lisResultBacTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="lisResultBacJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="lisResultBacJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="lisResultBacJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="lisResultBacJob" class="net.hp.healthcare.job.LisResultBacJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+				
+		<bean id="lisResultTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="lisResultJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="lisResultJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="lisResultJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="lisResultJob" class="net.hp.healthcare.job.LisResultJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+
+		<bean id="orderItemTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="orderItemJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="orderItemJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="orderItemJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="orderItemJob" class="net.hp.healthcare.job.OrderItemJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+				
+		<bean id="patientTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="patientJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="patientJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="patientJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="patientJob" class="net.hp.healthcare.job.PatientJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+
+		<bean id="visitTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		    <property name="jobDetail" ref="visitJobDetail"/>
+		    <property name="cronExpression" value="0 0 1 * * ?"/>
+		</bean>
+		<bean id="visitJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="visitJob"/>
+		    <property name="targetMethod" value="execute"/>
+		    <property name="concurrent" value="false"/>
+		</bean>
+		<bean id="visitJob" class="net.hp.healthcare.job.VisitJob">
+		    <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		</bean>
+								
+</beans>
